@@ -2,12 +2,12 @@ package recognition.neuralnet;
 
 import org.jetbrains.annotations.NotNull;
 import recognition.connections.BasicNeuralConnection;
-import recognition.neuralnet.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class NeuralNet {
-    int layerCount; // TODO Replace the HiddenNeuron creation in the constructor with a dynamic one; This variable does nothing for now
+    int hiddenLayerCount; // TODO Replace the HiddenNeuron creation in the constructor with a dynamic one; This variable does nothing for now
     int outputCount;
     int inputCount;
     int hiddenCount;
@@ -19,11 +19,13 @@ public class NeuralNet {
 
     public ArrayList<Double> outputValues = new ArrayList<>();
 
-    public NeuralNet(int layerCount, int inputCount, int outputCount, int hiddenCount){
-        this.layerCount = layerCount;
+    public NeuralNet(int hiddenLayerCount, int inputCount, int outputCount, int hiddenCount){
+        this.hiddenLayerCount = hiddenLayerCount;
         this.inputCount = inputCount;
         this.outputCount = outputCount;
         this.hiddenCount = hiddenCount;
+
+        Random random = new Random();
 
         for (int i = 0; i < outputCount; i++) { //Create outputCount of OutputNeurons
             this.outputNeurons.add(new OutputNeuron(this));
@@ -33,7 +35,8 @@ public class NeuralNet {
         for (int currentHiddenNeuron = 0; currentHiddenNeuron < hiddenCount; currentHiddenNeuron++) { //For every OutputNeurons, create as much connections as there are HiddenNeurons in that layer and immediately  + add the connections to the current HiddenNeuron
             HiddenNeuron tempNeuron = new HiddenNeuron(this);
             for(OutputNeuron outputNeuron: outputNeurons){
-                tempNeuron.neuralConnections.add(new BasicNeuralConnection(outputNeuron));
+                tempNeuron.neuralConnections.add(new BasicNeuralConnection(outputNeuron,1));
+//                tempNeuron.neuralConnections.add(new BasicNeuralConnection(outputNeuron,random.nextGaussian()));
             }
             hiddenNeurons.get(0).add(tempNeuron);
         }
@@ -47,7 +50,8 @@ public class NeuralNet {
         for (int currentHiddenNeuron = 0; currentHiddenNeuron < hiddenCount; currentHiddenNeuron++) { //For now, a static solution for only two layers TODO Replace with a dynamic solution
             HiddenNeuron tempNeuron = new HiddenNeuron(this);
             for(HiddenNeuron hiddenNeuron: hiddenNeurons.get(0)){
-                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron));
+                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron,1));
+//                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron, random.nextGaussian()));
             }
             hiddenNeurons.get(0).add(tempNeuron);
         }
@@ -55,14 +59,22 @@ public class NeuralNet {
         for (int currentInputNeuron = 0; currentInputNeuron < inputCount; currentInputNeuron++) { // Creating connection for the input layer
             InputNeuron tempNeuron = new InputNeuron(this);
             for(HiddenNeuron hiddenNeuron: hiddenNeurons.get(1)){ //TODO Replace with a dynamic solution
-                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron));
+                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron,1));
+//                tempNeuron.neuralConnections.add(new BasicNeuralConnection(hiddenNeuron,random.nextGaussian()));
             }
             inputNeurons.add(tempNeuron);
         }
 
-        for (int currentBiasedLayer = 0; currentBiasedLayer < 2; currentBiasedLayer++) { //Create a BiasNeuron for every layer in the network (First hidden layer doesn't need a bias, hence the variable named currentBiasedLayer) TODO Replace or include into HiddenNeuron creation loop to comply with layerCount variable
+        biasNeurons.add(new BiasNeuron(1, this)); //Creating BiasNeurons for the output layer TODO Find a way to combine the creation of BiasNeurons of the output layer with the one for the hidden layers
+        for (OutputNeuron outputNeuron: outputNeurons){
+            biasNeurons.get(0).neuralConnections.add(new BasicNeuralConnection(outputNeuron, 1));
+        }
+
+        for (int currentBiasedLayer = hiddenLayerCount; currentBiasedLayer > 1; currentBiasedLayer--) { //Create a BiasNeuron for every biased layer in the network (the input layer and the first hidden layer don't need a bias) TODO Replace or include into HiddenNeuron creation loop to comply with layerCount variable
             biasNeurons.add(new BiasNeuron(1, this));
-            for (HiddenNeuron hiddenNeuron: hiddenNeurons.get())
+            for (HiddenNeuron hiddenNeuron: hiddenNeurons.get(currentBiasedLayer)){
+                biasNeurons.get(currentBiasedLayer).neuralConnections.add(new BasicNeuralConnection(hiddenNeuron, 1));
+            }
         }
     }
 
