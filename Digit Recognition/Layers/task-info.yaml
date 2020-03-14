@@ -1,0 +1,373 @@
+type: edu
+custom_name: stage4
+files:
+- name: test/DigitRecognitionTest.java
+  visible: false
+  text: |
+    import org.hyperskill.hstest.v6.stage.BaseStageTest;
+    import org.hyperskill.hstest.v6.testcase.CheckResult;
+    import org.hyperskill.hstest.v6.testcase.TestCase;
+    import recognition.Main;
+
+    import java.util.*;
+    import java.util.List;
+    import java.util.stream.Collectors;
+
+    class Clue {
+        String answer;
+        Clue(int ans) {
+            answer = Integer.toString(ans);
+        }
+    }
+
+    public class DigitRecognitionTest extends BaseStageTest<Clue> {
+        public DigitRecognitionTest() throws Exception {
+            super(Main.class);
+        }
+
+        @Override
+        public List<TestCase<Clue>> generate() {
+            return List.of(
+                new TestCase<Clue>()
+                    .setAttach(new Clue(1))
+                    .setInput(
+                        "2\n_X_\n" +
+                            "_X_\n" +
+                            "XX_\n" +
+                            "XX_\n" +
+                            "_XX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(2))
+                    .setInput(
+                        "2\nXX_\n" +
+                            "__X\n" +
+                            "__X\n" +
+                            "X__\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(7))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "__X\n" +
+                            "__X\n" +
+                            "__X\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(9))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "_XX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(0))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "X_X\n" +
+                            "X_X\n" +
+                            "_XX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(3))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "__X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "_XX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(4))
+                    .setInput(
+                        "2\nX_X\n" +
+                            "__X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "__X\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(5))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X__\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "XX_\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(8))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "XXX\n" +
+                            "X_X\n" +
+                            "XX_\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(6))
+                    .setInput(
+                        "2\n_XX\n" +
+                            "X__\n" +
+                            "XXX\n" +
+                            "X_X\n" +
+                            "XXX\n"),
+
+
+
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(0))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "X_X\n" +
+                            "X_X\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(1))
+                    .setInput(
+                        "2\n_X_\n" +
+                            "_X_\n" +
+                            "_X_\n" +
+                            "_X_\n" +
+                            "_X_\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(2))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "__X\n" +
+                            "XXX\n" +
+                            "X__\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(3))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "__X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(4))
+                    .setInput(
+                        "2\nX_X\n" +
+                            "X_X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "__X\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(5))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X__\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(6))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X__\n" +
+                            "XXX\n" +
+                            "X_X\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(7))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "__X\n" +
+                            "__X\n" +
+                            "__X\n" +
+                            "__X\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(8))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "XXX\n" +
+                            "X_X\n" +
+                            "XXX\n"),
+
+                new TestCase<Clue>()
+                    .setAttach(new Clue(9))
+                    .setInput(
+                        "2\nXXX\n" +
+                            "X_X\n" +
+                            "XXX\n" +
+                            "__X\n" +
+                            "XXX\n")
+
+            );
+        }
+
+        @Override
+        public CheckResult check(String reply, Clue clue) {
+            List<String> lines = reply.lines().collect(Collectors.toList());
+            String lastLine = lines.get(lines.size() - 1);
+
+            String[] lastLineWords = lastLine.split("\\s+");
+
+            List<String> foundedNumbers = new ArrayList<>();
+            for (String word : lastLineWords) {
+                if (word.matches("[0-9]+")) {
+                    foundedNumbers.add(word);
+                }
+            }
+
+            if (foundedNumbers.size() > 1) {
+                String numbers = String.join(", ", foundedNumbers);
+                return new CheckResult(false,
+                    "Last line contains several numbers, " +
+                        "you should output only one number.\n" +
+                        "Numbers found: " + numbers);
+            }
+
+            if (foundedNumbers.size() == 0) {
+                return new CheckResult(false,
+                    "Last line in output " +
+                        "doesn't contain any numbers.");
+            }
+
+            String founded = foundedNumbers.get(0);
+
+            if (!founded.equals(clue.answer)) {
+                return new CheckResult(false,
+                    "Last line contains number " + founded + " " +
+                        "but expected to contain number " + clue.answer);
+            }
+
+            return CheckResult.TRUE;
+        }
+    }
+  learner_created: false
+- name: src/recognition/Main.java
+  visible: true
+  text: "package recognition;\nimport java.io.*;\nimport java.util.*;\nimport java.util.stream.DoubleStream;\n\
+    import java.util.stream.IntStream;\n\npublic class Main {\n    public static void\
+    \ main(String[] args) {\n        final int generations = 1000;\n\n        Scanner\
+    \ scanner = new Scanner(System.in);\n        System.out.println(\n           \
+    \     \"1. Learn the network\\n\" +\n                \"2. Guess a number\"\n \
+    \       );\n        int choice = scanner.nextInt();\n        switch (choice){\n\
+    \            case 1:\n                System.out.println(\"Your choice: 1\");\n\
+    \                learn(generations);\n                break;\n            case\
+    \ 2:\n                System.out.println(\"Your choice: 2\");\n              \
+    \  guess();\n        }\n    }\n    static int calcArraySum(double[] array) {\n\
+    \        int result = 0;\n        for (int i = 0; i != array.length; i++) result\
+    \ += array[i];\n        return result;\n    }\n\n    static double[] computeResult(double[]\
+    \ input, double[][] weights) {\n        double[] results = new double[weights.length];\n\
+    \        double[] inputCalc = new double[input.length];\n        for (int i =\
+    \ 0; i != results.length; i++) {\n            for (int j = 0; j != input.length;\
+    \ j++) {\n                inputCalc[j] = input[j] * weights[i][j];\n         \
+    \   }\n            results[i] += sigmoid(calcArraySum(inputCalc));\n        }\n\
+    \        return results;\n    }\n    static double sigmoid(double input){\n  \
+    \      return (1/( 1 + Math.pow(Math.E,(-1*input))));\n    }\n    static void\
+    \ guess(){\n        Scanner scanner = new Scanner(System.in);\n\n        double[][]\
+    \ w;\n        try {\n            FileInputStream fis = new FileInputStream(\"\
+    /Users/ivanm/weights.dat\");\n            ObjectInputStream iis = new ObjectInputStream(fis);\n\
+    \            w = (double[][]) iis.readObject();\n            iis.close();\n  \
+    \          fis.close();\n        } catch (IOException e) {\n            System.out.println(\"\
+    File not found, did you teach the network first?\");\n            return;\n  \
+    \      } catch (ClassNotFoundException e) {\n            e.printStackTrace();\n\
+    \            return;\n        }\n\n        System.out.println(\"Input grid:\"\
+    );\n\n        String fullLine = \"\";\n        double[] results;\n        int\
+    \ result = 0;\n        double[] a = new double[15];\n\n        for (int i = 0;\
+    \ i != 5; i++) fullLine += scanner.nextLine();\n        char[] charInput = fullLine.toCharArray();\n\
+    \        for (int i = 0; i != a.length; i++) {\n            if (charInput[i] ==\
+    \ '_') {\n                a[i] = 0;\n            } else {\n                a[i]\
+    \ = 1;\n            }\n        }\n\n        results = computeResult(a, w);\n \
+    \       double max = results[0];\n        for (int i = 1; i < results.length;\
+    \ i++)\n            if (results[i] > max) {\n                max = results[i];\n\
+    \            }\n        for (int i = 0; i < results.length; i++)\n           \
+    \ if (results[i] == max) {\n                result = i;\n                break;\n\
+    \            }\n\n        System.out.println(Arrays.toString(results));\n    \
+    \    System.out.println(\"This number is \" + (result == 9 ? 0 : result + 1));\n\
+    \    }\n    static void learn(int generations){\n        final double[][] DATASET_INPUTS\
+    \ = {\n                {0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0},\n      \
+    \          {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1},\n                {1,\
+    \ 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1},\n                {1, 0, 1, 1, 0,\
+    \ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1},\n                {1, 1, 1, 1, 0, 0, 1, 1, 1,\
+    \ 0, 0, 1, 1, 1, 1},\n                {1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1,\
+    \ 1, 1},\n                {1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1},\n   \
+    \             {1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1},\n               \
+    \ {1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1},\n                {1, 1, 1, 1,\
+    \ 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1}\n        };\n        Random random = new Random();\n\
+    \        double[] results;\n        double[][] w = new double[10][15];\n//   \
+    \     double[][] w = {\n//                {-1, 1, -1, -1, 1, -1, -1, 1, -1, -1,\
+    \ 1, -1, -1, 1, -1},\n//                {1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, -1,\
+    \ 1, 1, 1},\n//                {1, 1, 1, -1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1,\
+    \ 1},\n//                {1, -1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, -1, -1, 1},\n\
+    //                {1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, 1},\n//     \
+    \           {1, 1, 1, 1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 1},\n//            \
+    \    {1, 1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1, -1, -1, 1},\n//              \
+    \  {1, 1, 1, 1, -1, 1, 1, 1, 1, 1, -1, 1, 1, 1, 1},\n//                {1, 1,\
+    \ 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1},\n//                {1, 1, 1, 1, -1,\
+    \ 1, 1, -1, 1, 1, -1, 1, 1, 1, 1}\n//        };\n        double[][][] dw = new\
+    \ double[10][10][15];\n        int genCount = generations;\n\n        System.out.println(\"\
+    Learning...\");\n        for(int i = 0; i != w.length; i++){\n            for(int\
+    \ j = 0; j != w[0].length; j++) w[i][j] = 0;\n        }\n        for(double[]\
+    \ el : w){\n            System.out.println(Arrays.toString(el));\n        }\n\
+    \        System.out.println(\"\\n\");\n        while (genCount>=0){\n        \
+    \    \n            for(int i = 0; i != DATASET_INPUTS.length; i++){\n        \
+    \        results = computeResult(DATASET_INPUTS[i], w);\n                for(int\
+    \ j = 0; j != DATASET_INPUTS.length; j++){\n                    for (int k = 0;\
+    \ k != DATASET_INPUTS[j].length; k++){\n                        dw[i][j][k] =\
+    \ (0.5 * DATASET_INPUTS[i][k] * ( (i == j?1:0) - results[j]));\n             \
+    \       }\n                }\n            }\n            double result = 0;\n\
+    \            for (int i = 0; i != 10; i++) {\n                for (int j = 0;\
+    \ j != 15; j++) {\n                    for (int k = 0; k != 10; k++) {\n     \
+    \                   result += dw[k][i][j];\n                    }\n          \
+    \          w[i][j] += result/10;\n                    result = 0;\n          \
+    \      }\n            }\n\n            genCount--;\n        }\n\n        try {\n\
+    \            for(double[] el : dw[1]){\n                System.out.println(Arrays.toString(el));\n\
+    \            }\n            FileOutputStream fos = new FileOutputStream(\"/Users/ivanm/weights.dat\"\
+    );\n            ObjectOutputStream oos = new ObjectOutputStream(fos);\n      \
+    \      oos.writeObject(w);\n            oos.close();\n            fos.close();\n\
+    \            FileInputStream fis = new FileInputStream(\"/Users/ivanm/weights.dat\"\
+    );\n            ObjectInputStream iis = new ObjectInputStream(fis);\n        \
+    \    double[][] wtest = (double[][]) iis.readObject();\n            iis.close();\n\
+    \            fis.close();\n            System.out.println(Arrays.deepEquals(w,\
+    \ wtest));\n            System.out.println(\"Done! Saved to the file.\");\n  \
+    \      } catch (Exception e) {\n            System.out.println(\"Error saving\
+    \ to file!\");\n        }\n    }\n}"
+  learner_created: false
+- name: src/recognition/Main.class
+  visible: true
+  learner_created: false
+- name: src/recognition/connections/BasicNeuralConnection.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/BasicNeuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/InputNeuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/OutputNeuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/HiddenNeuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/BiasNeuron.java
+  visible: true
+  learner_created: true
+- name: src/recognition/neuralnet/NeuralNet.java
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/projects/51/stages/280/implement
+status: Unchecked
+record: 4
